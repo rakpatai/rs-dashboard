@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>RS Trade Log — 2026-07-08</title>
+<style>
+:root{
+ --bg:#f9f9f7; --surf:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --mut:#898781;
+ --grid:#e1e0d9; --axis:#c3c2b7; --bord:rgba(11,11,11,.10);
+ --acc:#2a78d6; --acc-track:#cde2fb; --viol:#4a3aa7;
+ --up:#0ca30c; --dn:#d03b3b; --warn:#fab219; --ser:#ec835a;
+ --tup:#006300; --tdn:#b22a2a;
+}
+:root[data-theme="dark"]{
+ --bg:#0d0d0d; --surf:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --mut:#898781;
+ --grid:#2c2c2a; --axis:#383835; --bord:rgba(255,255,255,.10);
+ --acc:#3987e5; --acc-track:rgba(57,135,229,.20); --viol:#9085e9;
+ --up:#0ca30c; --dn:#d03b3b; --warn:#fab219; --ser:#ec835a;
+ --tup:#0ca30c; --tdn:#e66767;
+}
+@media (prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){
+  --bg:#0d0d0d; --surf:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --mut:#898781;
+  --grid:#2c2c2a; --axis:#383835; --bord:rgba(255,255,255,.10);
+  --acc:#3987e5; --acc-track:rgba(57,135,229,.20); --viol:#9085e9;
+  --up:#0ca30c; --dn:#d03b3b; --warn:#fab219; --ser:#ec835a;
+  --tup:#0ca30c; --tdn:#e66767;
+ }
+}
+*{box-sizing:border-box}
+body{margin:0;padding:16px clamp(10px,3vw,32px) 40px;background:var(--bg);color:var(--ink);
+ font:14px/1.55 system-ui,-apple-system,"Segoe UI","Leelawadee UI",sans-serif}
+header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+h1{font-size:20px;margin:0}
+.sub{color:var(--ink2);font-size:12.5px;margin-top:2px}
+h2{font-size:16px;margin:26px 0 10px}
+.hsub{font-weight:400;font-size:12px;color:var(--mut)}
+#themeBtn{background:var(--surf);color:var(--ink2);border:1px solid var(--bord);border-radius:8px;
+ padding:6px 10px;font:12.5px system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.hbtns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.navlink{background:var(--surf);color:var(--ink2);border:1px solid var(--bord);border-radius:8px;
+ padding:6px 10px;font-size:12.5px;text-decoration:none;white-space:nowrap}
+.navlink:hover{color:var(--ink)}
+.num{font-variant-numeric:tabular-nums}
+.mut{color:var(--mut)} .sm{font-size:12.5px} .nw{white-space:nowrap}
+.up{color:var(--tup)} .dn{color:var(--tdn)}
+/* alert strip + chips */
+.alerts{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:3px 10px;
+ font-size:12.5px;border:1px solid transparent;white-space:nowrap}
+.chip.crit{background:rgba(208,59,59,.13);color:var(--tdn);border-color:rgba(208,59,59,.3)}
+.chip.warn{background:rgba(250,178,25,.15);color:var(--ink);border-color:rgba(250,178,25,.4)}
+.chip.good{background:rgba(12,163,12,.12);color:var(--tup);border-color:rgba(12,163,12,.3)}
+.chip.ok{background:rgba(12,163,12,.08);color:var(--tup)}
+.chip.viol{background:rgba(116,98,220,.16);color:var(--viol);border-color:rgba(116,98,220,.35);font-weight:600}
+.chip.violsoft{background:rgba(116,98,220,.10);color:var(--viol)}
+.chip.hold{background:rgba(250,178,25,.12);color:var(--ink2)}
+.chip.mutc{background:rgba(137,135,129,.14);color:var(--ink2)}
+/* stat tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.tile{background:var(--surf);border:1px solid var(--bord);border-radius:12px;padding:12px 14px}
+.tl{font-size:12px;color:var(--ink2)}
+.tv{font-size:26px;font-weight:600;margin-top:2px}
+.tv.crit{color:var(--tdn)} .tv.warn{color:var(--ser)} .tv.viol2{color:var(--viol)}
+.ts{font-size:11.5px;color:var(--mut);margin-top:2px}
+/* tables */
+.twrap{overflow-x:auto;background:var(--surf);border:1px solid var(--bord);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th{font-size:11.5px;text-align:left;color:var(--mut);font-weight:600;padding:9px 10px;border-bottom:1px solid var(--grid)}
+td{padding:8px 10px;border-bottom:1px solid var(--grid);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:left}
+.tk{font-weight:700}
+/* chart cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.card{background:var(--surf);border:1px solid var(--bord);border-radius:12px;padding:10px 12px 6px}
+.ch{font-size:13px;margin-bottom:4px;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.keys{margin-left:auto;font-size:11px;color:var(--ink2);display:flex;gap:10px;flex-wrap:wrap}
+.key{white-space:nowrap}
+.kk{display:inline-block;width:14px;height:0;border-top:2px dashed var(--mut);vertical-align:middle;margin-right:3px}
+.k-trail{border-color:var(--dn)} .k-avg{border-color:var(--ink2)} .k-bo{border-top-style:dotted;border-color:var(--acc)}
+.nochart{color:var(--mut);font-size:12.5px;padding:24px 0;text-align:center}
+.tlog{font-size:11.5px;color:var(--ink2);margin:4px 0 6px;line-height:1.7}
+.tlog summary{cursor:pointer;color:var(--mut)}
+/* svg */
+svg{display:block}
+line.gl{stroke:var(--grid);stroke-width:1}
+.tick{fill:var(--mut);font:10.5px system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.tx{text-anchor:middle}
+.cu line,.cd line{stroke-width:1}
+.cu line{stroke:var(--up)} .cd line{stroke:var(--dn)}
+.cu rect{fill:var(--surf);stroke:var(--up);stroke-width:1.4}
+.cd rect{fill:var(--dn);stroke:var(--dn)}
+.ltrail{stroke:var(--dn);stroke-width:1.4;stroke-dasharray:5 4}
+.lavg{stroke:var(--ink2);stroke-width:1.2;stroke-dasharray:2 4}
+.lbo{stroke:var(--acc);stroke-width:1.2;stroke-dasharray:1.5 3.5}
+.mb{fill:var(--up);stroke:var(--surf);stroke-width:1.5}
+.ms{fill:var(--dn);stroke:var(--surf);stroke-width:1.5}
+.sline{fill:none;stroke:var(--acc);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.swash{fill:var(--acc);opacity:.10}
+.sdot{fill:var(--acc);stroke:var(--surf);stroke-width:2}
+/* meter */
+.meterrow{display:flex;align-items:center;gap:8px}
+.meter{width:88px;height:8px;border-radius:4px;background:var(--acc-track);overflow:hidden;flex:none}
+.mfill{height:100%;border-radius:4px;background:var(--acc)}
+footer{margin-top:34px;color:var(--mut);font-size:11.5px;line-height:1.7}
+@media (max-width:560px){ body{font-size:13px} .tv{font-size:22px} table{min-width:560px} }
+</style>
+</head>
+<body>
+<header>
+ <div><h1>📒 Trade Log</h1><div class="sub">บันทึกซื้อขายจริงทั้งหมด · อัปเดต 2026-07-08</div></div>
+ <div class="hbtns"><a class="navlink" href="index.html">📋 Dashboard</a><button id="themeBtn" type="button">🌗 อัตโนมัติ</button></div>
+</header>
+
+<div class="tiles">
+ <div class="tile"><div class="tl">รายการทั้งหมด</div><div class="tv">28</div><div class="ts">จาก lists/portfolio.json</div></div>
+ <div class="tile"><div class="tl">ซื้อ</div><div class="tv up">▲ 26</div><div class="ts">BUY</div></div>
+ <div class="tile"><div class="tl">ขาย</div><div class="tv dn">▼ 2</div><div class="ts">SELL</div></div>
+ <div class="tile"><div class="tl">สถานะ</div><div class="tv">16 / 2</div><div class="ts">ถืออยู่ / ปิดแล้ว</div></div>
+</div>
+
+<h2>📌 สรุปรายตัว <span class="hsub">ทุนเฉลี่ยคำนวณด้วยสูตรเดียวกับ engine · ราคา/UPnL จาก engine</span></h2>
+<div class="twrap"><table>
+<thead><tr><th>ตัว</th><th>สถานะ</th><th>ไม้สุทธิ</th><th>ทุนเฉลี่ย</th><th>ปิดล่าสุด</th><th>UPnL</th><th>รายการ</th><th>เทรดล่าสุด</th></tr></thead>
+<tbody><tr><td class="tk">002371-CN</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">5.0%</td><td class="num">593.42</td><td class="num">806.39</td><td class="num"><span class="up num">+35.89%</span></td><td class="num">2</td><td class="num">2026-06-08</td></tr><tr><td class="tk">2269-HK</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">2.5%</td><td class="num">36.57</td><td class="num">36.78</td><td class="num"><span class="up num">+0.57%</span></td><td class="num">1</td><td class="num">2026-07-03</td></tr><tr><td class="tk">2359-HK</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">2.5%</td><td class="num">145.70</td><td class="num">150.30</td><td class="num"><span class="up num">+3.16%</span></td><td class="num">1</td><td class="num">2026-06-25</td></tr><tr><td class="tk">3191-HK</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">5.0%</td><td class="num">88.79</td><td class="num">108.60</td><td class="num"><span class="up num">+22.31%</span></td><td class="num">2</td><td class="num">2026-06-08</td></tr><tr><td class="tk">3750-HK</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">5.0%</td><td class="num">674.54</td><td class="num">652.00</td><td class="num"><span class="dn num">-3.34%</span></td><td class="num">1</td><td class="num">2026-04-10</td></tr><tr><td class="tk">522-HK</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">5.0%</td><td class="num">176.44</td><td class="num">190.00</td><td class="num"><span class="up num">+7.69%</span></td><td class="num">2</td><td class="num">2026-06-02</td></tr><tr><td class="tk">600584-CN</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">2.0%</td><td class="num">75.47</td><td class="num">100.99</td><td class="num"><span class="up num">+33.81%</span></td><td class="num">1</td><td class="num">2026-06-02</td></tr><tr><td class="tk">6181-HK</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">5.0%</td><td class="num">500.00</td><td class="num">392.20</td><td class="num"><span class="dn num">-21.56%</span></td><td class="num">1</td><td class="num">2026-05-20</td></tr><tr><td class="tk">6809-HK</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">5.0%</td><td class="num">347.17</td><td class="num">333.60</td><td class="num"><span class="dn num">-3.91%</span></td><td class="num">3</td><td class="num">2026-06-15</td></tr><tr><td class="tk">981-HK</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">2.0%</td><td class="num">77.42</td><td class="num">73.45</td><td class="num"><span class="dn num">-5.13%</span></td><td class="num">1</td><td class="num">2026-05-06</td></tr><tr><td class="tk">9992-HK</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">5.0%</td><td class="num">160.00</td><td class="num">151.10</td><td class="num"><span class="dn num">-5.56%</span></td><td class="num">1</td><td class="num">2026-03-26</td></tr><tr><td class="tk">ASML-US</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">5.0%</td><td class="num">1,861.44</td><td class="num">1,747.28</td><td class="num"><span class="dn num">-6.13%</span></td><td class="num">1</td><td class="num">2026-06-29</td></tr><tr><td class="tk">DRAM-US</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">5.0%</td><td class="num">59.20</td><td class="num">60.59</td><td class="num"><span class="up num">+2.34%</span></td><td class="num">3</td><td class="num">2026-07-07</td></tr><tr><td class="tk">LRCX-US</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">3.0%</td><td class="num">246.52</td><td class="num">326.13</td><td class="num"><span class="up num">+32.29%</span></td><td class="num">1</td><td class="num">2026-04-28</td></tr><tr><td class="tk">MU-US</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">5.0%</td><td class="num">776.24</td><td class="num">938.38</td><td class="num"><span class="up num">+20.89%</span></td><td class="num">2</td><td class="num">2026-07-07</td></tr><tr><td class="tk">TSM-US</td><td><span class="chip ok">✓ ถืออยู่</span></td><td class="num">2.0%</td><td class="num">419.50</td><td class="num">432.57</td><td class="num"><span class="up num">+3.12%</span></td><td class="num">1</td><td class="num">2026-05-07</td></tr><tr><td class="tk">601138-CN</td><td><span class="chip mutc">ปิดแล้ว</span></td><td class="num">0.0%</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">2</td><td class="num">2026-07-03</td></tr><tr><td class="tk">NVDA-US</td><td><span class="chip mutc">ปิดแล้ว</span></td><td class="num">0.0%</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">2</td><td class="num">2026-06-25</td></tr></tbody></table></div>
+
+<h2>🧾 รายการทั้งหมด <span class="hsub">ล่าสุดบนสุด</span></h2>
+<div class="twrap"><table>
+<thead><tr><th>วันที่</th><th>ตัว</th><th>ฝั่ง</th><th>ไม้</th><th>ราคา fill</th><th>หมายเหตุ</th></tr></thead>
+<tbody><tr><td class="num nw">2026-07-07</td><td class="tk">MU-US</td><td><span class="chip good">▲ BUY</span></td><td class="num">3.0%</td><td class="num">920.41</td><td class="sm">ซื้อเพิ่ม 3% เป็น 5% ครบไซส์</td></tr><tr><td class="num nw">2026-07-07</td><td class="tk">DRAM-US</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">59.61</td><td class="sm">ซื้อเพิ่ม 2% เป็น 5% ครบไซส์</td></tr><tr><td class="num nw">2026-07-03</td><td class="tk">601138-CN</td><td><span class="chip crit">▼ SELL</span></td><td class="num">4.0%</td><td class="num">65.43</td><td class="sm">engine SELL(profit) หลุด trailing stop — ขายทั้งหมด</td></tr><tr><td class="num nw">2026-07-03</td><td class="tk">2269-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.5%</td><td class="num">36.57</td><td class="sm">engine BUY-A breakout — ไม้แรก 2.5% (WuXi Bio, ANVISA GMP cert)</td></tr><tr><td class="num nw">2026-06-29</td><td class="tk">ASML-US</td><td><span class="chip good">▲ BUY</span></td><td class="num">5.0%</td><td class="num">1,861.44</td><td class="sm">เข้าเต็มไม้ 5% พอร์ต</td></tr><tr><td class="num nw">2026-06-25</td><td class="tk">NVDA-US</td><td><span class="chip crit">▼ SELL</span></td><td class="num">5.0%</td><td class="num">197.52</td><td class="sm">Stop Loss ตามสัญญาณขาย</td></tr><tr><td class="num nw">2026-06-25</td><td class="tk">2359-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.5%</td><td class="num">145.70</td><td class="sm">ซื้อ 2.5% เผื่อเพิ่มทีหลัง ห่าง stop loss</td></tr><tr><td class="num nw">2026-06-15</td><td class="tk">6809-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">343.59</td><td class="sm">ซื้อเพิ่ม 2% ครบ 5%</td></tr><tr><td class="num nw">2026-06-08</td><td class="tk">DRAM-US</td><td><span class="chip good">▲ BUY</span></td><td class="num">1.0%</td><td class="num">58.93</td><td class="sm">ซื้อเพิ่ม 1% เป็น3% เผื่อเพิ่มทีหลัง ห่าง stop loss</td></tr><tr><td class="num nw">2026-06-08</td><td class="tk">3191-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">83.99</td><td class="sm">ซื้อเพิ่ม 2% ครบ 5%</td></tr><tr><td class="num nw">2026-06-08</td><td class="tk">002371-CN</td><td><span class="chip good">▲ BUY</span></td><td class="num">3.0%</td><td class="num">584.98</td><td class="sm">ซื้อเพิ่ม 3% ครบ 5%</td></tr><tr><td class="num nw">2026-06-03</td><td class="tk">6809-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">380.06</td><td class="sm">ซื้อเพิ่ม 2% เผื่อเพิ่มทีหลัง ห่าง stop loss</td></tr><tr><td class="num nw">2026-06-02</td><td class="tk">600584-CN</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">75.47</td><td class="sm">ซื้อ 2% เผื่อเพิ่มทีหลัง ห่าง stop loss</td></tr><tr><td class="num nw">2026-06-02</td><td class="tk">522-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">3.0%</td><td class="num">184.40</td><td class="sm">ซื้อถัวเพิ่ม 3% รวมเป็น 5% พอร์ต — ราคาย่อลงมาใกล้ stop loss ซื้อถัว</td></tr><tr><td class="num nw">2026-06-02</td><td class="tk">002371-CN</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">606.08</td><td class="sm">ซื้อ 2% เผื่อเพิ่มทีหลัง ห่าง stop loss</td></tr><tr><td class="num nw">2026-06-01</td><td class="tk">NVDA-US</td><td><span class="chip good">▲ BUY</span></td><td class="num">5.0%</td><td class="num">222.23</td><td class="sm">เข้าเต็มไม้ 5% พอร์ต หลังประกาศ CPU potential business</td></tr><tr><td class="num nw">2026-05-26</td><td class="tk">DRAM-US</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">58.93</td><td class="sm">ซื้อ 2% เผื่อเพิ่มทีหลัง ห่าง stop loss</td></tr><tr><td class="num nw">2026-05-20</td><td class="tk">6181-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">5.0%</td><td class="num">500.00</td><td class="sm">ลดจาก 20% เหลือ 5% ถือเป็น Coreport รอ short against</td></tr><tr><td class="num nw">2026-05-20</td><td class="tk">3191-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">3.0%</td><td class="num">91.99</td><td class="sm">ซื้อ 3% เผื่อเพิ่มทีหลัง</td></tr><tr><td class="num nw">2026-05-08</td><td class="tk">601138-CN</td><td><span class="chip good">▲ BUY</span></td><td class="num">4.0%</td><td class="num">63.73</td><td class="sm">ซื้อ 4% เต็ม</td></tr><tr><td class="num nw">2026-05-07</td><td class="tk">TSM-US</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">419.50</td><td class="sm">ซื้อ 2% เผื่อเพิ่มทีหลัง ห่าง stop loss</td></tr><tr><td class="num nw">2026-05-06</td><td class="tk">981-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">77.42</td><td class="sm">ซื้อเพิ่ม 2% เผื่อเพิ่มทีหลัง ห่าง stop loss</td></tr><tr><td class="num nw">2026-05-05</td><td class="tk">6809-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">1.0%</td><td class="num">288.54</td><td class="sm">ซื้อ 1% เผื่อเพิ่มทีหลัง ห่าง stop loss</td></tr><tr><td class="num nw">2026-05-05</td><td class="tk">522-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">164.50</td><td class="sm">แบ่งไม้แรก 2% พอร์ต — พึ่งขออนุมัติ IC แต่ราคาห่าง stop loss เกิน เลยแบ่งไม้เข้าก่อน</td></tr><tr><td class="num nw">2026-05-04</td><td class="tk">MU-US</td><td><span class="chip good">▲ BUY</span></td><td class="num">2.0%</td><td class="num">559.98</td><td class="sm">ซื้อ 2% เผื่อเพิ่มทีหลัง ห่าง stop loss</td></tr><tr><td class="num nw">2026-04-28</td><td class="tk">LRCX-US</td><td><span class="chip good">▲ BUY</span></td><td class="num">3.0%</td><td class="num">246.52</td><td class="sm">ซื้อ 3% เผื่อเพิ่มทีหลัง</td></tr><tr><td class="num nw">2026-04-10</td><td class="tk">3750-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">5.0%</td><td class="num">674.54</td><td class="sm">เข้าเต็มไม้ 5% พอร์ต — พึ่งขออนุมัติ IC และราคาไม่ห่าง stop loss เกิน</td></tr><tr><td class="num nw">2026-03-26</td><td class="tk">9992-HK</td><td><span class="chip good">▲ BUY</span></td><td class="num">5.0%</td><td class="num">160.00</td><td class="sm">ลดจาก 10% เหลือ 5% ถือเป็น Coreport รอ short against</td></tr></tbody></table></div>
+
+<footer>ข้อมูลจาก lists/portfolio.json (บันทึกโดยผู้ใช้หลังเทรดจริง — กฎข้อ 4) · สร้างโดย build_dashboard.py<br>
+สัญญาณเพื่อประกอบการตัดสินใจเท่านั้น — ระบบไม่ส่งคำสั่งเทรด ผู้ใช้ execute เองที่ broker</footer>
+<script>
+(function(){
+ var k='rsdash-theme', b=document.getElementById('themeBtn'), r=document.documentElement;
+ function sget(){ try{return localStorage.getItem(k);}catch(e){return null;} }
+ function sset(v){ try{localStorage.setItem(k,v);}catch(e){} }
+ var cur=sget()||'auto';
+ function lab(v){return v==='auto'?'\ud83c\udf17 \u0e2d\u0e31\u0e15\u0e42\u0e19\u0e21\u0e31\u0e15\u0e34':(v==='dark'?'\ud83c\udf19 \u0e21\u0e37\u0e14':'\u2600\ufe0f \u0e2a\u0e27\u0e48\u0e32\u0e07');}
+ function apply(v){ if(v==='auto'){r.removeAttribute('data-theme');} else {r.setAttribute('data-theme',v);} b.textContent=lab(v); }
+ apply(cur);
+ b.addEventListener('click',function(){ cur = cur==='auto'?'light':(cur==='light'?'dark':'auto');
+  apply(cur); sset(cur); });
+})();
+</script>
+</body>
+</html>
